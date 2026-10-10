@@ -1,291 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="山水雲林股份有限公司 — 軟體開發、系統整合、智慧農業的專業夥伴" />
-  <title>山水雲林股份有限公司</title>
+  <meta name="description" content="百店入口網 — 匯集100家優質店家，餐飲美食、零售購物、生活服務應有盡有。" />
+  <title>百店入口網 | 優質店家平台</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='35' width='60' height='45' rx='4' fill='%231a73e8'/%3E%3Cpath d='M30 35 Q30 20 50 20 Q70 20 70 35' fill='none' stroke='%231a73e8' stroke-width='4'/%3E%3Ccircle cx='50' cy='55' r='8' fill='%23fff'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body>
 
-  <!-- ========== 導覽列 ========== -->
-  <header id="navbar">
+  <!-- ===== Navbar ===== -->
+  <nav id="navbar" class="navbar">
     <div class="nav-container">
-      <a href="#hero" class="logo" aria-label="山水雲林股份有限公司">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 36c4-6 10-6 14 0 4-8 10-8 14 0 4-6 8-6 8-6" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M6 26c4-6 10-6 14 0 4-8 10-8 14 0 4-6 8-6 8-6" stroke="var(--secondary)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="38" cy="14" r="4" fill="var(--accent)"/>
-          </svg>
-        </span>
-        <span class="logo-text">山水雲林</span>
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">&#128722;</span>
+        <span class="logo-text">百店入口網</span>
       </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="#hero" class="nav-link">首頁</a>
-        <a href="#about" class="nav-link">關於我們</a>
-        <a href="#services" class="nav-link">服務項目</a>
-        <a href="#projects" class="nav-link">實績案例</a>
-        <a href="#contact" class="nav-link">聯絡我們</a>
-      </nav>
+      <div class="nav-search">
+        <input type="text" id="searchInput" placeholder="搜尋店家名稱、分類、地區..." autocomplete="off" />
+        <span class="search-icon">&#128269;</span>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </header>
+  </nav>
 
-  <!-- ========== 首屏 Hero ========== -->
+  <!-- ===== Hero ===== -->
   <section id="hero" class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-tag" data-reveal>山水雲林股份有限公司</p>
-      <h1 class="hero-title" data-reveal>以土地深耕科技<br/>以軟體連結未來</h1>
-      <p class="hero-sub" data-reveal>軟體開發 · 系統整合 · 智慧農業 —— 為您的企業打造永續數位轉型方案</p>
-      <div class="hero-actions" data-reveal>
-        <a href="#services" class="btn btn-primary">探索服務</a>
-        <a href="#contact" class="btn btn-outline">聯絡我們</a>
+      <h1 class="hero-title">百店入口網</h1>
+      <p class="hero-subtitle">匯集 100 家優質店家，一個平台滿足您所有需求</p>
+      <div class="hero-search">
+        <input type="text" id="heroSearchInput" placeholder="輸入店家名稱、分類或地區..." />
+        <button id="heroSearchBtn" class="btn btn-primary">搜尋</button>
       </div>
-    </div>
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="mouse"><span class="wheel"></span></span>
+      <div class="hero-stats" id="heroStats">
+        <div class="hero-stat"><span class="hero-stat-num" id="statTotal">0</span><span class="hero-stat-label">店家總數</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="statCategories">0</span><span class="hero-stat-label">分類數</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="statCities">0</span><span class="hero-stat-label">地區數</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- ========== 關於我們 ========== -->
-  <section id="about" class="section">
+  <!-- ===== Category Filter Bar ===== -->
+  <section class="filter-bar" id="filterBar">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="section-label">ABOUT US</span>
-        <h2 class="section-title">關於山水雲林</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text" data-reveal>
-          <p>山水雲林股份有限公司取名自「山之穩、水之流、雲之變、林之茂」，象徵我們在科技領域中追求穩健、流暢、創新與生長的核心理念。</p>
-          <p>我們專注於為企業及農業單位提供端到端的數位化解決方案，從客製化軟體開發、跨平台系統整合，到物聯網與智慧農業應用，協助客戶在數位轉型的浪潮中穩步前行。</p>
-          <p>結合軟體工程與在地農業知識，山水雲林致力成為科技與土地之間的橋樑。</p>
-        </div>
-        <div class="about-stats" data-reveal>
-          <div class="stat-card">
-            <span class="stat-num" data-count="10">0</span><span class="stat-suffix">+</span>
-            <p>年技術經驗</p>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num" data-count="80">0</span><span class="stat-suffix">+</span>
-            <p>專案交付</p>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num" data-count="30">0</span><span class="stat-suffix">+</span>
-            <p>合作夥伴</p>
-          </div>
-          <div class="stat-card">
-            <span class="stat-num" data-count="99">0</span><span class="stat-suffix">%</span>
-            <p>客戶滿意度</p>
-          </div>
-        </div>
+      <div class="filter-scroll">
+        <button class="filter-chip active" data-category="all">全部</button>
+        <button class="filter-chip" data-category="餐飲美食">餐飲美食</button>
+        <button class="filter-chip" data-category="零售購物">零售購物</button>
+        <button class="filter-chip" data-category="美容美髮">美容美髮</button>
+        <button class="filter-chip" data-category="生活服務">生活服務</button>
+        <button class="filter-chip" data-category="醫療保健">醫療保健</button>
+        <button class="filter-chip" data-category="教育學習">教育學習</button>
+        <button class="filter-chip" data-category="休閒娛樂">休閒娛樂</button>
+        <button class="filter-chip" data-category="電子科技">電子科技</button>
+        <button class="filter-chip" data-category="家居裝潢">家居裝潢</button>
+        <button class="filter-chip" data-category="交通旅遊">交通旅遊</button>
       </div>
     </div>
   </section>
 
-  <!-- ========== 服務項目 ========== -->
-  <section id="services" class="section section-alt">
+  <!-- ===== Main Content ===== -->
+  <main class="main-content">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="section-label">SERVICES</span>
-        <h2 class="section-title">核心服務項目</h2>
-        <p class="section-desc">三大主力服務，為您量身打造從規劃到落地的一站式解決方案</p>
+      <div class="content-header">
+        <h2 id="resultTitle">所有店家</h2>
+        <span class="result-count" id="resultCount">載入中...</span>
       </div>
-      <div class="services-grid">
 
-        <!-- 軟體開發 -->
-        <article class="service-card" data-reveal>
-          <div class="service-img" style="background-image:url('images/123.png')">
-            <span class="service-badge">01</span>
-          </div>
-          <div class="service-body">
-            <h3>軟體開發</h3>
-            <p>客製化 Web / App 應用、企業內部管理系統、API 服務開發，以敏捷開發流程確保品質與交付速度。</p>
-            <ul class="service-list">
-              <li>Web &amp; Mobile 應用開發</li>
-              <li>企業資源規劃（ERP）</li>
-              <li>API 整合與微服務架構</li>
-              <li>UI / UX 設計與前端工程</li>
-            </ul>
-          </div>
-        </article>
+      <!-- Store Grid -->
+      <div class="store-grid" id="storeGrid">
+        <div class="loading-message">正在載入店家資料...</div>
+      </div>
 
-        <!-- 系統整合 -->
-        <article class="service-card" data-reveal>
-          <div class="service-img" style="background-image:url('https://images.pexels.com/photos/17489160/pexels-photo-17489160.jpeg?auto=compress&cs=tinysrgb&w=800')">
-            <span class="service-badge">02</span>
-          </div>
-          <div class="service-body">
-            <h3>系統整合</h3>
-            <p>異質系統對接、資料庫整併、雲端架構部署與維運，讓分散的資訊流轉為可用的商業智慧。</p>
-            <ul class="service-list">
-              <li>跨平台資料交換與 ETL</li>
-              <li>雲端架構規劃與遷移</li>
-              <li>DevOps 自動化 CI/CD</li>
-              <li>資訊安全與監控維運</li>
-            </ul>
-          </div>
-        </article>
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
 
-        <!-- 智慧農業 -->
-        <article class="service-card" data-reveal>
-          <div class="service-img" style="background-image:url('https://images.pexels.com/photos/10269715/pexels-photo-10269715.jpeg?auto=compress&cs=tinysrgb&w=800')">
-            <span class="service-badge">03</span>
-          </div>
-          <div class="service-body">
-            <h3>智慧農業</h3>
-            <p>物聯網感測網路、環境數據監控、自動化灌溉與温室控制，以數據驅動農業決策，提升產量與品質。</p>
-            <ul class="service-list">
-              <li>IoT 環境感測平台</li>
-              <li>智能灌溉與温室控制</li>
-              <li>農產履歷與溯源系統</li>
-              <li>數據分析與產量預測</li>
-            </ul>
-          </div>
-        </article>
-
+      <!-- No Results -->
+      <div class="no-results" id="noResults" style="display:none;">
+        <span class="no-results-icon">&#128533;</span>
+        <p>找不到符合條件的店家</p>
+        <p class="no-results-hint">請嘗試其他關鍵字或分類</p>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- ========== 實績案例 ========== -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="section-label">PROJECTS</span>
-        <h2 class="section-title">實績案例</h2>
-        <p class="section-desc">精選代表性專案，展現我們在各領域的落地能力</p>
-      </div>
-      <div class="projects-grid">
-
-        <div class="project-card" data-reveal>
-          <div class="project-img" style="background-image:url('https://images.pexels.com/photos/7988745/pexels-photo-7988745.jpeg?auto=compress&cs=tinysrgb&w=800')"></div>
-          <div class="project-info">
-            <span class="project-cat">軟體開發</span>
-            <h3>連鎖零售 POS 管理平台</h3>
-            <p>為連鎖零售業者打造跨門市 POS 與庫存管理系統，支援即時銷售分析與進銷存自動化。</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-reveal>
-          <div class="project-img" style="background-image:url('https://images.pexels.com/photos/4330787/pexels-photo-4330787.jpeg?auto=compress&cs=tinysrgb&w=800')"></div>
-          <div class="project-info">
-            <span class="project-cat">系統整合</span>
-            <h3>政府機關資料交換中樞</h3>
-            <p>整合多個公部門資料庫，建立標準化 API 閘道，實現跨單位資料即時交換與權限管控。</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-reveal>
-          <div class="project-img" style="background-image:url('https://images.pexels.com/photos/5230957/pexels-photo-5230957.jpeg?auto=compress&cs=tinysrgb&w=800')"></div>
-          <div class="project-info">
-            <span class="project-cat">智慧農業</span>
-            <h3>智慧温室 IoT 監控系統</h3>
-            <p>部署溫濕度、土壤與光照感測器，結合自動化灌溉控制面板，協助農場降低 30% 用水量。</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-reveal>
-          <div class="project-img" style="background-image:url('https://images.pexels.com/photos/6803554/pexels-photo-6803554.jpeg?auto=compress&cs=tinysrgb&w=800')"></div>
-          <div class="project-info">
-            <span class="project-cat">軟體開發</span>
-            <h3>物流車隊動態排程 App</h3>
-            <p>開發即時車隊定位與智慧排程行動應用，優化配送路線並提升車隊營運效率。</p>
-          </div>
-        </div>
-
-      </div>
+  <!-- ===== Store Detail Modal ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="storeModal">
+      <button class="modal-close" id="modalClose" aria-label="關閉">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
     </div>
-  </section>
+  </div>
 
-  <!-- ========== 聯絡我們 ========== -->
-  <section id="contact" class="section section-alt">
-    <div class="container contact-wrap">
-      <div class="contact-info" data-reveal>
-        <span class="section-label">CONTACT</span>
-        <h2 class="section-title">與我們聯絡</h2>
-        <p class="section-desc">有專案需求或合作想法？歡迎與我們聯繫，我們將由專人與您接洽。</p>
-        <ul class="contact-list">
-          <li>
-            <span class="ci-icon" aria-hidden="true">📍</span>
-            <div><strong>公司地址</strong><br/>南投縣竹山鎮山林路一段 168 號</div>
-          </li>
-          <li>
-            <span class="ci-icon" aria-hidden="true">📞</span>
-            <div><strong>聯絡電話</strong><br/><a href="tel:+886-49-123456">049-123-456</a></div>
-          </li>
-          <li>
-            <span class="ci-icon" aria-hidden="true">✉️</span>
-            <div><strong>電子郵件</strong><br/><a href="mailto:service@sanshui-cloudforest.com.tw">service@sanshui-cloudforest.com.tw</a></div>
-          </li>
-          <li>
-            <span class="ci-icon" aria-hidden="true">🕒</span>
-            <div><strong>營業時間</strong><br/>週一至週五 09:00 – 18:00</div>
-          </li>
-        </ul>
-      </div>
-      <form class="contact-form" id="contactForm" data-reveal novalidate>
-        <div class="form-row">
-          <label for="cf-name">姓名 <span class="req">*</span></label>
-          <input type="text" id="cf-name" name="name" required placeholder="您的稱呼" />
-        </div>
-        <div class="form-row">
-          <label for="cf-email">電子郵件 <span class="req">*</span></label>
-          <input type="email" id="cf-email" name="email" required placeholder="you@example.com" />
-        </div>
-        <div class="form-row">
-          <label for="cf-phone">聯絡電話</label>
-          <input type="tel" id="cf-phone" name="phone" placeholder="09xx-xxx-xxx" />
-        </div>
-        <div class="form-row">
-          <label for="cf-msg">訊息內容 <span class="req">*</span></label>
-          <textarea id="cf-msg" name="message" rows="5" required placeholder="請簡述您的需求..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">送出訊息</button>
-        <p class="form-note" id="formNote" role="status"></p>
-      </form>
-    </div>
-  </section>
-
-  <!-- ========== Footer ========== -->
+  <!-- ===== Footer ===== -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 36c4-6 10-6 14 0 4-8 10-8 14 0 4-6 8-6 8-6" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M6 26c4-6 10-6 14 0 4-8 10-8 14 0 4-6 8-6 8-6" stroke="var(--secondary)" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="38" cy="14" r="4" fill="var(--accent)"/>
-          </svg>
-        </span>
-        <div>
-          <p class="footer-name">山水雲林股份有限公司</p>
-          <p class="footer-sub">Sanshui Cloudforest Co., Ltd.</p>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>&#128722; 百店入口網</h3>
+          <p>匯集100家優質店家的入口平台，涵蓋餐飲、零售、服務等各類店家，讓您輕鬆找到所需。</p>
+        </div>
+        <div class="footer-info">
+          <h4>關於平台</h4>
+          <p>本平台為靜態網站，店家資料以 JSON 格式儲存，由 JavaScript 動態讀取渲染。</p>
         </div>
       </div>
-      <nav class="footer-links" aria-label="頁尾導覽">
-        <a href="#about">關於我們</a>
-        <a href="#services">服務項目</a>
-        <a href="#projects">實績案例</a>
-        <a href="#contact">聯絡我們</a>
-      </nav>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 山水雲林股份有限公司 版權所有</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 百店入口網. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- ===== Floating: Back to Top + Social Quick Links ===== -->
+  <div class="floating-tools" id="floatingTools">
+    <div class="social-quick-links" id="socialQuickLinks">
+      <a href="https://line.me" target="_blank" rel="noopener" class="social-link social-line" aria-label="Line@ 連結">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.64 2 10.14c0 4.02 3.55 7.39 8.36 8.03.32.07.76.21.87.49.1.25.07.64.03.89l-.14.85c-.04.25-.2.98.87.53s5.78-3.4 7.89-5.83C21.27 13.53 22 11.9 22 10.14 22 5.64 17.52 2 12 2zm-3.5 9.5c0 .28-.22.5-.5.5H6.5c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v2.5h1.5c.28 0 .5.22.5.5zm1.5 0c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v3zm4 0c0 .28-.22.5-.5.5s-.5-.22-.5-.5V8.75l-1.1 1.65c-.1.15-.2.2-.4.2s-.3-.05-.4-.2L10.5 8.75v2.75c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5.16 0 .31.08.4.2l1.6 2.4 1.6-2.4c.09-.12.24-.2.4-.2.28 0 .5.22.5.5v3zm2.5-2c.28 0 .5.22.5.5s-.22.5-.5.5H15v.75h2c.28 0 .5.22.5.5s-.22.5-.5.5h-2.5c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5H17c.28 0 .5.22.5.5s-.22.5-.5.5h-2v.75h1.5z"/></svg>
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" class="social-link social-fb" aria-label="Facebook 連結">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link social-ig" aria-label="Instagram 連結">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.34 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.12-1.38.66-.66 1.07-1.34 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.12-.66-.66-1.34-1.07-2.12-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84c-3.4 0-6.16 2.76-6.16 6.16S8.6 18.16 12 18.16s6.16-2.76 6.16-6.16S15.4 5.84 12 5.84zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.41-10.85c-.8 0-1.44.65-1.44 1.44s.65 1.44 1.44 1.44 1.44-.65 1.44-1.44-.64-1.44-1.44-1.44z"/></svg>
+      </a>
+    </div>
+    <button class="back-to-top" id="backToTop" aria-label="回到頂端">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
